@@ -1,8 +1,17 @@
-import styles from "../styles/Home.module.css";
+import { useRouter } from "next/router";
 import NewMeetupForm from "../components/meetups/NewMeetupForm";
 export default function NewMeetup() {
-  const addMeetupHandler = (data) => {
-    console.log(data);
+  const router = useRouter();
+  const addMeetupHandler = async (data) => {
+    const response = await fetch("/api/hello", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    router.replace("/");
   };
   return (
     <div>

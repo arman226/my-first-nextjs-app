@@ -30,7 +30,8 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const { meetupId } = context.params;
-
+  // here you can fetch data from the API
+  // after fetching, you can assign the selected response values to the props so the component/page can use 'em
   return {
     props: {
       title: "testing the getStatic Props",
