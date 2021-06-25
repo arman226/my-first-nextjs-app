@@ -1,4 +1,4 @@
-import styles from "../styles/Home.module.css";
+import { useState, useEffect } from "react";
 import MeetupList from "../components/meetups/MeetupList";
 
 const DUMMY_MEETUPS = [
@@ -20,10 +20,16 @@ const DUMMY_MEETUPS = [
   },
 ];
 export default function Home() {
+  const [loadedMeetups, setLoadedMeetups] = useState([]);
+
+  useEffect(() => {
+    //handle http call
+    setLoadedMeetups(DUMMY_MEETUPS);
+  }, []);
   return (
-    <div className={styles.container}>
+    <>
       <h1>The Home Page</h1>
-      <MeetupList meetups={DUMMY_MEETUPS} />
-    </div>
+      <MeetupList meetups={loadedMeetups} />
+    </>
   );
 }
