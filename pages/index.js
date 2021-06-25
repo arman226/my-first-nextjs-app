@@ -1,11 +1,16 @@
+import { Fragment } from "react";
+import Head from "next/head";
 import MeetupList from "../components/meetups/MeetupList";
 
 export default function Home({ meetups, test }) {
   return (
-    <>
-      <h1>The Home Page {test}</h1>
+    <Fragment>
+      <Head>
+        <title>React Meetups</title>
+        <meta description='This is a webapp developed by Armando Bibay Jr.'></meta>
+      </Head>
       <MeetupList meetups={meetups} />
-    </>
+    </Fragment>
   );
 }
 
