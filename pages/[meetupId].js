@@ -17,6 +17,8 @@ export const getStaticPaths = async () => {
   return {
     // if fallback is set to false,
     // it will return a 404 (NOT FOUND) error whenever an undetected parameter is indicated by the user
+    // if you set the value to "blocking", next JS will not respond to 404 page immediately
+    //
     fallback: true,
     paths: [
       {
