@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import MeetupList from "../components/meetups/MeetupList";
 
 const DUMMY_MEETUPS = [
@@ -19,17 +18,38 @@ const DUMMY_MEETUPS = [
     description: "Muslim Prayer Meetup",
   },
 ];
-export default function Home() {
-  const [loadedMeetups, setLoadedMeetups] = useState([]);
-
-  useEffect(() => {
-    //handle http call
-    setLoadedMeetups(DUMMY_MEETUPS);
-  }, []);
+export default function Home({ meetups, test }) {
   return (
     <>
-      <h1>The Home Page</h1>
-      <MeetupList meetups={loadedMeetups} />
+      <h1>The Home Page {test}</h1>
+      <MeetupList meetups={meetups} />
     </>
   );
 }
+
+// // this will not run during the build process, but instead,
+// // always on the server after deployment
+// export const getServerSideProps = async (context) => {
+//   const { req, res } = context;
+
+//   //fetch date from the API
+//   return {
+//     props: {
+//       meetups: DUMMY_MEETUPS,
+//       test: "server",
+//     },
+//   };
+// };
+
+export const getStaticProps = async () => {
+  return {
+    props: {
+      meetups: DUMMY_MEETUPS,
+      test: "come to me",
+    },
+    //regenerates the code whenever there is an incoming change a
+    //according to the time value set by the developer
+    //the time unit is seconds (s)
+    revalidate: 1,
+  };
+};
